@@ -1,0 +1,11 @@
+#!/bin/bash
+# This script prints Hi after the 9th iteration of printing Best School
+n=0
+while [ $n -ne 10 ];
+do
+    echo "Best School"
+    if [ $n == 9 ]; then
+       	   echo "Hi"
+      fi 
+       ((n++))
+done
