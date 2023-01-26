@@ -1,8 +1,17 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # Prints badluck at 4th iteration, goodluck for 8th iteration and Best school for all the other numbers
-n=0
-while [ $n -ne 10 ]
+n=1
+while [ $n -ne 11 ]
 do
-if [ $n -e 4 ]
-do
-echo '
+    if [ $n == 4 ]; then
+	echo "bad luck"
+	((n++))
+    fi
+    if [ $n == 8 ]; then
+	echo "good luck"
+	((n++))
+    fi
+    echo "Best School"
+    ((n++))
+       
+done 
