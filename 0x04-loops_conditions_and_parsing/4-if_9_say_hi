@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 # This script prints Hi after the 9th iteration of printing Best School
 n=0
 while [ $n -ne 10 ];
