@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# This script manages some daemons
+
+while true; do 
+echo "I am alive!" > /tmp/my_processes
+sleep 2
+done
