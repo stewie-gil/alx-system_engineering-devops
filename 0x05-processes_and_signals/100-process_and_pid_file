@@ -1,13 +1,22 @@
 #!/usr/bin/env bash
 # creates a script and kills it with SIGQUIT or SIGTERM
 
-echo $$ > /var/run/myscript.pid
+echo $$ >/var/run/holbertonscript.pid
+
+
+
+trap "echo Y U no love me?!" SIGINT
+
+trap "echo I hate the kill command; rm -f /var/run/holbertonscript.pid; exit" SIGTERM
+
+trap "rm -f /var/run/holbertonscript.pid; exit" SIGQUIT
+
+
 
 while true; do
-echo "To infinity and beyond"
-sleep 2
+    
+    echo "To infinity and beyond"
+    
+    sleep 2
+    
 done
-
-trap "Y U no love me?!" SIGINT
-trap "I hate the kill command" SIGTERM
-trap "rm -f /var/run/myscript.pid; exit" SIGQUIT 
