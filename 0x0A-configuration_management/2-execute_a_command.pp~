@@ -1,0 +1,4 @@
+exec {'killmenow':
+command => 'pkill killmenow',
+path => '/root/alx-system_engineering-devops/0x0A-configuration_management/killmenow'
+}
