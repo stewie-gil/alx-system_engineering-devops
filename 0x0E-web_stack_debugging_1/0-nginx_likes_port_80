@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
-# Fix web stack debugging_1 server
+# creating a symbolic link conneting site-enabled default
+# and site-available default.
+# Then restarting
+# Finally deleting the nginx pid file. crucial to prevent
+# conflicts
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
 rm /run/nginx.pid
