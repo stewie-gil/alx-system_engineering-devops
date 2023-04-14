@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
-# creating a symbolic link conneting site-enabled default
-# and site-available default.
-# Then restarting
-# Finally deleting the nginx pid file. crucial to prevent
-# conflicts
+# creating a symbolic link, restartign and deleting pid
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx restart
 rm /run/nginx.pid
