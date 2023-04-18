@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-
-useradd -d /var/www/html -s /sbin/nologin nginx
-sed -i 's/user  nginx;/user  nginx;\n\tworker_processes  auto;/g' /etc/nginx/nginx.conf
-sed -i 's/listen 80;/listen [::]:8080;/g' /etc/nginx/sites-available/default
-service nginx restart
+pkill -f apache2
+sed -i s/80/8080/g /etc/nginx/sites-available/default
+chmod -R 666 /etc/nginx/nginx.conf
+sudo -u nginx service nginx restart
