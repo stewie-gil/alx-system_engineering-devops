@@ -1,4 +1,14 @@
 #!/usr/bin/env bash
 
-user=$1
-sudo -u $user whoami
+if [ $# -eq 0 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
+
+#lets now check if user exist
+if ! id -u "$1" > /dev/null 2>&1; then
+    echo "Error: user '$1' not found"
+    exit 1
+fi
+
+sudo -u "$1" whoami
