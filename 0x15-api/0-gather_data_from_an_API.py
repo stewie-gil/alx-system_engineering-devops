@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-
+"""Script that returns informatoin about Todo"""
 import requests
 import sys
 
@@ -10,7 +10,7 @@ if __name__ == "__main__":
 
     employee = requests.get(emp_url).json()
     todo_items = requests.get(todo_url).json()
-    
+
     num_completed_tasks = 0
     completed_tasks = []
     total_num_tasks = 0
@@ -27,8 +27,8 @@ if __name__ == "__main__":
     else:
         task_str = "tasks"
 
-    sentence = f"Employee {employee.get('name')} is done with {num_completed_tasks} {task_str} out of {total_num_tasks}:"
+    sentence = f"Employee {employee.get('name')} is done with \
+{num_completed_tasks} {task_str} out of {total_num_tasks}:"
     print(sentence)
-    
     for task in completed_tasks:
         print("\t" + task)
