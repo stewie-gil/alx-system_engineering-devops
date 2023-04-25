@@ -17,15 +17,6 @@ if __name__ == "__main__":
 
     u = requests.get(user1).json()
     todo_list = requests.get(todo1).json()
-    completed = 0
-    total = 0
-    completed_list = []
-
-    for task in todo_list:
-        total += 1
-        if task.get("completed") is True:
-            completed += 1
-            completed_list.append(task.get("title"))
     with open('{}.csv'.format(id), 'w') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
         for t in todo_list:
