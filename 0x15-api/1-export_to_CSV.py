@@ -1,8 +1,7 @@
 #!/usr/bin/python3
 """
-Python script to print out todo list info
+Python script to export data to CSV format
 """
-
 import csv
 import requests
 import sys
