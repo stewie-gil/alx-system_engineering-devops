@@ -1,23 +1,34 @@
 #!/usr/bin/python3
 """
-    Python script that, exports data in the CSV format.
+Python script to print out todo list info
 """
 
-import csv
 import requests
 import sys
+import csv
 
 if __name__ == "__main__":
-    id = sys.argv[1]
-    usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
-    tds_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    employee_id = sys.argv[1]
 
-    u = requests.get(usr_url).json()
-    todo = requests.get(tds_url).json()
+    usr_url = "https://jsonplaceholder.typicode.com/users/{}"
+    todo_url = "https://jsonplaceholder.typicode.com/users/{}/todos"
+    user1 = usr_url.format(employee_id)
+    todo1 = todo_url.format(employee_id)
 
+    u = requests.get(user1).json()
+    todo_list = requests.get(todo1).json()
+    completed = 0
+    total = 0
+    completed_list = []
+
+    for task in todo_list:
+        total += 1
+        if task.get("completed") is True:
+            completed += 1
+            completed_list.append(task.get("title"))
     with open('{}.csv'.format(id), 'w') as csv_file:
         csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_ALL)
-        for t in todo:
+        for t in todo_list:
             row = [id, u.get("username"), t.get("completed"), t.get("title")]
             row = [str(value) for value in row]
             csv_writer.writerow(row)
