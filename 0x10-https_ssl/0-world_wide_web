@@ -1,13 +1,25 @@
-#!/usr/bin/env bash
-# Script that displays information about subdomains.
+#!/bin/bash
+domain=$1
+subdomains=$2
+if [ -z "$2" ]; then
+subdomains=(www lb-01 web-01 web-02)
+    
+fi
 
-domain=${1}
-subdomains=(${2:-www lb-01 web-01 web-02})
-
-subdomain_data() {
-	dig "${1}.${2}" | awk -v subdomain="${1}" '/ANSWER SECTION:/ { getline; print "The subdomain", subdomain, "is a", $4, "record and points to", $5 }'
+print_line(){
+    subdomain=$1
+    record=$2
+    result=$3
+    echo "The subdomain $subdomain is a $record record and points to $result"
 }
 
+
 for subdomain in "${subdomains[@]}"; do
-	subdomain_data "$subdomain" "$domain"
+    result=$(dig +short "$subdomain"."$domain")
+
+    
+    if [ -n "$result" ]; then
+        record=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION/ {getline; print $4}')
+        print_line "$subdomain" "$record" "$result"
+    fi
 done
