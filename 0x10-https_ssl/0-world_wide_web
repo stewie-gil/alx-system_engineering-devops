@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#script checks the record type for a domain name
+
 domain=$1
 subdomains=$2
 if [ -z "$2" ]; then
