@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 domain=$1
 
-if [ -z $2 ]; then
+if [ -z "$2" ]; then
 subdomains=(www lb-01 web-01 web-02)
 else
-subdomains=$2
+subdomains="$2"
 fi
 
 print_line(){
@@ -16,11 +16,11 @@ print_line(){
 
 
 for subdomain in "${subdomains[@]}"; do
-    result=$(dig +short $subdomain.$domain)
+    result=$(dig +short "$subdomain"."$domain")
 
     
-    if [ ! -z "$result" ]; then
-        record=$(dig $subdomain.$domain | awk '/ANSWER SECTION/ {getline; print $4}')
-        print_line $subdomain $record $result
+    if [ -n "$result" ]; then
+        record=$(dig "$subdomain"."$domain" | awk '/ANSWER SECTION/ {getline; print $4}')
+        print_line "$subdomain" "$record" "$result"
     fi
 done
