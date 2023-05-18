@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
 #changing ngnix to run as nginx and listen to 8080
-sed -i 's/^user\s\+\S\+/user nginx;/' /etc/nginx/nginx.conf
-sed -i 's/^listen\s\+\S\+\s*\S*\s*;/listen 8080 default_server;/' /etc/nginx/nginx.conf
+pkill -f apache2
+sed -i s/80/8080/g /etc/nginx/sites-available/default
+chmod -R 666 /etc/nginx/nginx.conf
+sudo -u nginx service nginx restart
