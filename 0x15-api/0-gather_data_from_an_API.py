@@ -15,17 +15,17 @@ if __name__ == "__main__":
     response = requests.get(
         "https://jsonplaceholder.typicode.com/users/{}".format(user_id))
     user_data = response.json()
-    name = user_data['name']
+    name = user_data.get('name')
     todos = requests.get(
         "https://jsonplaceholder.typicode.com/users/{}/todos".format(user_id))
     todo_list = todos.json()
     for task in todo_list:
-        if task['completed'] is True:
+        if task.get('completed') is True:
             completed_tasks = completed_tasks + 1
         total_tasks = total_tasks + 1
 
     print("Employee {} is done with tasks({}/{})".format(
         name, completed_tasks, total_tasks))
     for task in todo_list:
-        if task['completed'] is True:
-            print("\t {}".format(task['title']))
+        if task.get('completed') is True:
+            print("\t {}".format(task.get('title')))
