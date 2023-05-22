@@ -1,5 +1,7 @@
 #!/usr/bin/python3
+
 """Returns to-do list information for a given employee ID."""
+
 import requests
 import sys
 if __name__ == "__main__":
@@ -10,3 +12,5 @@ if __name__ == "__main__":
     print("Employee {} is done with tasks({}/{}):".format(
         user.get("name"), len(completed), len(todos)))
     [print("\t {}".format(c)) for c in completed]
+
+    
