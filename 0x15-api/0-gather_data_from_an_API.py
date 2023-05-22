@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-A python script to gather data from an api 
+A python script to gather data from an api
 """
 
 
