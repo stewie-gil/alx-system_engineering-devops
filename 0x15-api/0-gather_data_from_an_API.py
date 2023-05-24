@@ -1,31 +1,31 @@
 #!/usr/bin/python3
 """
-    Python script that, for a given employee ID, returns
-    information about his/her TODO list progress.
+    Using Python Requests module to gather some
+    information about a user
 """
 
 import requests
 import sys
 
 if __name__ == "__main__":
-    id = sys.argv[1]
-    usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(id)
-    tds_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(id)
+    user = sys.argv[1]
+    users = "https://jsonplaceholder.typicode.com/users/{}".format(user)
+    res = "https://jsonplaceholder.typicode.com/users/{}/todos".format(user)
 
-    user = requests.get(usr_url).json()
-    todo = requests.get(tds_url).json()
+    name = requests.get(users).json()['name']
+    todo_data = requests.get(res).json()
 
-    completed_nb = 0
-    total_nb = 0
-    completed_tasks = []
+    completed = 0
+    not_completed = 0
 
-    for task in todo:
-        total_nb += 1
-        if task.get("completed") is True:
-            completed_nb += 1
-            completed_tasks.append(task.get("title"))
+    for todo in todo_data:
+        if todo['completed'] is True:
+            completed = completed + 1
+        else:
+            not_completed = not_completed + 1
+    print("Employee {} is done with tasks ({}/{})".format
+          (name, completed, completed + not_completed))
 
-    sentence = "Employee {} is done with tasks({}/{}):"
-    print(sentence.format(user.get("name"), completed_nb, total_nb))
-    for task in completed_tasks:
-        print("\t {}".format(task))
+    for todo in todo_data:
+        if todo['completed'] is True:
+            print("\t {}".format(todo['title']))
