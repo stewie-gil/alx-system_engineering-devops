@@ -23,7 +23,7 @@ if __name__ == "__main__":
             completed = completed + 1
         else:
             not_completed = not_completed + 1
-    print("Employee {} is done with tasks ({}/{}):".format
+    print("Employee {} is done with tasks ({}/{})".format
           (name, completed, completed + not_completed))
 
     for todo in todo_data:
