@@ -1,0 +1,27 @@
+#!/usr/bin/python3
+"""
+    Using Python Requests module to gather some
+    info but now store it in csv format
+"""
+import json
+import requests
+import sys
+
+if __name__ == "__main__":
+    user = sys.argv[1]
+    users = "https://jsonplaceholder.typicode.com/users/{}".format(user)
+    res = "https://jsonplaceholder.typicode.com/users/{}/todos".format(user)
+
+    username = requests.get(users).json()['username']
+    todo_data = requests.get(res).json()
+
+    filename = "{}.csv".format(user)
+
+    with open(filename, 'w') as json_file:
+        tasks = []
+        for todo in todo_data:
+            tasks.append({"task": todo.get("title"),
+                         "completed": todo.get("completed"),
+                         "username": username})
+            data = {"{}".format(user): tasks}
+            json.dump(data, json_file)
