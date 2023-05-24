@@ -1,0 +1,19 @@
+server {
+    if ($host = www.kodip.tech) {
+        return 301 https://web-01.kodip.tech;
+    } # managed by Certbot
+
+
+    listen 80;
+    listen [::]:80;
+    server_name web-01.kodip.tech;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        root /var/www/html/;
+        index index.html;
+    }
+    #return 503; # managed by Certbot
+
+
+}
