@@ -8,7 +8,7 @@ import requests
 
 if __name__ == "__main__":
     all_user_data = {}
-    for i in range(1, 10):
+    for i in range(1, 11):
         userid = i
         users = f"https://jsonplaceholder.typicode.com/users/{userid}"
         res = f"https://jsonplaceholder.typicode.com/users/{userid}/todos"
