@@ -8,20 +8,23 @@ import requests
 import sys
 
 if __name__ == "__main__":
-    user = sys.argv[1]
-    users = "https://jsonplaceholder.typicode.com/users/{}".format(user)
-    res = "https://jsonplaceholder.typicode.com/users/{}/todos".format(user)
+    userid = sys.argv[1]
+    users = "https://jsonplaceholder.typicode.com/users/{}".format(userid)
+    res = "https://jsonplaceholder.typicode.com/users/{}/todos".format(userid)
 
     username = requests.get(users).json()['username']
     todo_data = requests.get(res).json()
 
-    filename = "{}.json".format(user)
+    filename = "{}.json".format(userid)
 
-    with open(filename, 'w') as json_file:
-        tasks = []
-        for todo in todo_data:
-            tasks.append({"task": todo.get("title"),
-                         "completed": todo.get("completed"),
-                         "username": username})
-            data = {"{}".format(user): tasks}
-            json.dump(data, json_file)
+    list = []
+    for todo in todo_data:
+        completed = todo['completed']
+        task = todo['title']
+        data = {"task": task, "completed": completed, "username": username}
+        list.append(data)
+    all_data = {userid: list}
+    json_data = json.dumps(all_data)
+
+    with open(filename, "w") as file:
+        file.write(json_data)
